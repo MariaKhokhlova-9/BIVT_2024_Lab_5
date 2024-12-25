@@ -1249,50 +1249,12 @@ public class Program
             mx = ST2;
             mn = ST1;
         }
-        int[,] M = new int[A.GetLength(0), A.GetLength(1) - 2];
         if (mx != mn)
         {
-            int[,] Q = new int[A.GetLength(0), A.GetLength(1) - 2];
-            for (int i = 0; i < A.GetLength(1); i++)
-            {
-                for (int j = 0; j < A.GetLength(0); j++)
-                {
-                    if (i < mn)
-                    {
-                        Q[j, i] = A[j, i];
-                    }
-                    else if (i > mn && i < mx)
-                    {
-                        Q[j, i - 1] = A[j, i];
-                    }
-                    else if (i > mx)
-                    {
-                        Q[j, i - 2] = A[j, i];
-                    }
-                }
-            }
-            M = Q;
+            A = RemoveColumn(A, mx);
+            A = RemoveColumn(A, mn);
         }
-        else
-        {
-            int[,] Q = new int[A.GetLength(0), A.GetLength(1) - 1];
-            for (int i = 0; i < A.GetLength(1); i++)
-            {
-                for (int j = 0; j < A.GetLength(0); j++)
-                {
-                    if (i < mn)
-                    {
-                        Q[j, i] = A[j, i];
-                    }
-                    else if (i > mx)
-                    {
-                        Q[j, i - 1] = A[j, i];
-                    }
-                }
-            }
-            M = Q;
-        }
-        A = M;
+        else A = RemoveColumn(A, mx);
     }
     public delegate int FindIndex(int[,] A);
     public void Task_3_10(ref int[,] matrix)
